@@ -1,0 +1,5 @@
+<section>
+  @if (person$ |async;as person) {
+    <sfeir-form [person]="person" (save)="updatePerson($event)" (cancel)="goBack()" />
+  }
+</section>

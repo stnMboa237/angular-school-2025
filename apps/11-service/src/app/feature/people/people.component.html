@@ -1,0 +1,5 @@
+<section>
+  @for (person of people$ |async;track person.id) {
+    <sfeir-card [person]="person" (personDelete)="deletePerson($event)" />
+  }
+</section>

@@ -1,0 +1,67 @@
+/**
+  - modify the top of icon to avoid the icon be just below the name of the speaker
+**/
+.reveal .slides section[data-background].speaker-slide img[alt*=badge] {
+  top: 800px
+}
+
+/**
+  - add a new class to display code correctly when there is a lot of code on the diapo
+**/
+.reveal .slides section.with-code pre.medium-code:not(.literal) code {
+  font-size: 1.1em;
+  line-height: 2em;
+}
+
+.reveal .slides section.with-code pre.big-code:not(.literal) code {
+  font-size: 1.3em;
+  line-height: 2em;
+}
+
+.reveal .slides section.with-code pre code {
+  max-height: 800px !important;
+  overflow: auto !important;
+}
+
+.reveal .slides section .important {
+  font-weight: bold;
+  color: darkred;
+}
+
+.reveal .slides section {
+  .bold {
+    font-weight: 600;
+  }
+
+  .file-name {
+    font-size: 12px;
+  }
+
+  .half {
+    width: 50%;
+  }
+
+  .tiers {
+    width: 30%;
+  }
+
+  .fill-rest {
+    flex: 2;
+  }
+
+  img[alt*='full-width-screen'] {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  img[alt*='bottom'] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+/** Specific **/
+
+@import 'custom-directive';

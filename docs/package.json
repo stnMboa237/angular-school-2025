@@ -1,0 +1,30 @@
+{
+  "name": "sfeirschoolangular",
+  "version": "2.0.0",
+  "description": "Sfeir School Angular with revealJS",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass ./scss/angular.scss:./css/angular.css --source-map --watch",
+    "sass-once": "sass ./scss/angular.scss:./css/angular.css --source-map",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "live-server --port=4242 --open=\"./index.html\" --watch=\"markdown,scripts/\"",
+    "start": "parallelshell \"npm run serve\" \"npm run sass\"",
+    "prepare": "node ./scripts/dont-touch/prepare-script.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sfeir-open-source/sfeir-school-theme.git"
+  },
+  "keywords": [
+    "typescript",
+    "sfeir"
+  ],
+  "authors": [
+    "Nicolas Frizzarin: frizzarin.n@sfeir.com"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sfeir-open-source/sfeir-school-theme/issues"
+  },
+  "homepage": "https://github.com/sfeir-open-source/sfeir-school-theme#readme"
+}
