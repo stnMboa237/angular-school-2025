@@ -8,6 +8,5 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// bootstraping de l'app. Main.ts est le fichier chargé en premier lors de l'exécution de l'app Angular
+platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.error(err));

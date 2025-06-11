@@ -31,6 +31,7 @@ a[mat-fab] {
   width: 100px;
   transform: scale(1.5);
 }
+
 .loader:before {
   content: '';
   display: block;
@@ -63,33 +64,46 @@ a[mat-fab] {
     transform: rotate(360deg);
   }
 }
+
 @keyframes dash {
   0% {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
   }
+
   50% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -35px;
   }
+
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
   }
 }
+
 @keyframes color {
+
   100%,
   0% {
     stroke: #d62d20;
   }
+
   40% {
     stroke: #0057e7;
   }
+
   66% {
     stroke: #008744;
   }
+
   80%,
   90% {
     stroke: #ffa700;
   }
+}
+
+mat-card {
+  text-align: center;
+  padding: 2rem;
 }
