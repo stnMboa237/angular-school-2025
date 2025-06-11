@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [BrowserModule, BrowserAnimationsModule, MaterialDesignModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] /* doit être présent seulement dans le root module. Car on ne peut bootstrapé ou lancer qu'à partir d'un seul composant dans l'arbre des composants!!! */
 })
 export class AppModule {
 
