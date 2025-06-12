@@ -31,8 +31,10 @@ mat-toolbar {
     }
 
     img {
-      height: 100%;
-      margin-left: -60px;
+      display: inline-block;
+      padding-top: 4px;
+      height: 40px;
+
     }
   }
 }

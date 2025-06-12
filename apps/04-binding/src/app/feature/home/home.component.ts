@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sfeir-home',
@@ -6,10 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
   standalone: false,
 })
-export class HomeComponent implements OnInit {
-  name = 'Sfeir Luxembourg';
-
-  ngOnInit(): void {
-    console.log('HomeComponent.ngOnInit');
-  }
+export class HomeComponent {
+  name = 'SWORD Luxembourg';
 }
