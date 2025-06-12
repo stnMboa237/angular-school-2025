@@ -9,6 +9,6 @@ import { MaterialDesignModule } from './material-design.module';
   declarations: [AppComponent, HomeComponent],
   imports: [BrowserModule, BrowserAnimationsModule, MaterialDesignModule],
   providers: [],
-  bootstrap: [HomeComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

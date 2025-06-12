@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class HomeComponent {
-  name = 'Sfeir Luxembourg';
+  name = 'Sword Luxembourg';
 }
