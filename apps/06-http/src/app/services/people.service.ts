@@ -14,13 +14,22 @@ export class PeopleService {
     private readonly peopleBaseUrl: string = environment.peopleEndpoint;
 
     getPeoples(): Observable<People[]> {
-        return this.httpClient.get<People[]>(`${this.peopleBaseUrl}/peoples`).pipe(
+        return this.httpClient.get<People[]>(`${this.peopleBaseUrl}/${environment.peoples}`).pipe(
             map(peoples => {
                 if (peoples !== undefined && peoples !== null) {
                     localStorage.setItem(environment.peoplesCaches, JSON.stringify(peoples));
                 }
                 return peoples;
             }),
+            catchError((err) => {
+                console.error(err);
+                return EMPTY;
+            })
+        );
+    }
+
+    getPeoplesV2(): Observable<People[]> {
+        return this.httpClient.get<People[]>(`${this.peopleBaseUrl}/${environment.peoples}`).pipe(
             catchError((err) => {
                 console.error(err);
                 return EMPTY;
@@ -47,6 +56,15 @@ export class PeopleService {
 
     getRandomInteger(maxValue: number): number {
         return Math.floor(Math.random() * maxValue);
+    }
+
+    getRandomPeopleV2(): Observable<People> {
+        return this.httpClient.get<People>(`${this.peopleBaseUrl}/${environment.random}`).pipe(
+            catchError((err) => {
+                console.error(err);
+                return EMPTY;
+            })
+        );
     }
 
 }

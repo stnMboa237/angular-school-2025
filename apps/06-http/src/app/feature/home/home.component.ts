@@ -53,8 +53,8 @@ import { PeopleService } from '../../services/people.service';
 export class HomeComponent implements OnDestroy {
 
   private readonly peopleService = inject(PeopleService);
-  protected peoples$: Observable<People[]> | undefined = this.peopleService.getPeoples();
-  protected currentPeople$: Observable<People> | undefined = this.peopleService.getRandomPeople();
+  protected peoples$: Observable<People[]> | undefined = this.peopleService.getPeoplesV2();
+  protected currentPeople$: Observable<People> | undefined = this.peopleService.getRandomPeopleV2();
   protected getRandomPerson() {
     this.currentPeople$ = this.peopleService.getRandomPeople();
   }
