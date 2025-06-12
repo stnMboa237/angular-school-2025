@@ -3,8 +3,45 @@ import { PEOPLE } from '../../mocks/people.mock';
 import { People } from '../../shared/models/people.model';
 
 @Component({
-  selector: 'sfeir-home',
-  templateUrl: './home.component.html',
+  selector: 'sfeir-home', templateUrl: './home.component.html',
+  // template: `
+  //   <section>
+  //     <mat-card appearance="outlined" class="mat-whiteframe-2dp">
+  //       <mat-card-title-group>
+  //         <img mat-card-image [ngSrc]="person.photo" alt="person-photo" height="128" width="128" />
+  //         <mat-card-title>
+  //           <a href="/people/1"> <span>{{ person.firstname + ' ' + person.lastname}}</span> </a>
+  //         </mat-card-title>
+  //         <mat-card-subtitle>{{ person.entity }}</mat-card-subtitle>
+  //         <mat-card-subtitle class="contact-info">
+  //           <mat-icon>email</mat-icon>
+  //           <a [href]="'mailto:'+ person.email" title="Send an email to Powers Blacks" class="truncate">{{person.email}}</a>
+  //         </mat-card-subtitle>
+  //         <mat-card-subtitle class="contact-info">
+  //           <mat-icon>phone</mat-icon>
+  //           <a [href]="'tel:' + person.phone" title="Call Powers">{{person.phone}}</a>
+  //         </mat-card-subtitle>
+  //       </mat-card-title-group>
+  //       <mat-card-content>
+  //         <div class="contact-info">Manager <a href="/people/1">{{ person.manager }}</a></div>
+  //         <div class="contact-info">Location<a href="http://www.sfeir.com/contact/">SFEIR</a></div>
+  //         <div class="buttons-info">
+  //           <a mat-button title="Locate" href="/people/1">
+  //             <mat-icon>map</mat-icon>
+  //           </a>
+  //           <a mat-button title="Edit" href="/people/1">
+  //             <mat-icon>create</mat-icon>
+  //           </a>
+  //           <a mat-button title="Delete">
+  //             <mat-icon>delete</mat-icon>
+  //           </a>
+  //         </div>
+  //       </mat-card-content>
+  //     </mat-card>
+  //   </section>
+
+  //   <button mat-fab color="accent" (click)="getRandomPerson()"><i class="material-icons">autorenew</i></button>
+  //`,
   styleUrls: ['./home.component.scss'],
   standalone: false,
 })
@@ -14,5 +51,14 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     const [firstPerson] = PEOPLE;
     this.person = firstPerson;
+  }
+
+  protected getRandomPerson(): People {
+    this.person = PEOPLE[this.getRandomInteger(PEOPLE.length)];
+    return this.person;
+  }
+
+  protected getRandomInteger(maxValue: number): number {
+    return Math.floor(Math.random() * maxValue);
   }
 }
