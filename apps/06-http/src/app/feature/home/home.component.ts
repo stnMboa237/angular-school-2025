@@ -13,19 +13,24 @@ import { CardComponent } from '../../shared/components/card.component';
   template: `
     @if(currentPeople$ | async; as people) {
       <section>
-        <sfeir-card [peopleParam]="people" />
+        <sfeir-card [peopleParam]="people" (personDeleteEvent)="deletePeople($event)"/>
       </section>
     }
     <button mat-fab color="accent" (click)="getRandomPerson()"><i class="material-icons">autorenew</i></button>
   `,
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
 
   private readonly peopleService = inject(PeopleService);
   protected peoples$: Observable<People[]> | undefined = this.peopleService.getPeoples();
   protected currentPeople$: Observable<People> | undefined = this.peopleService.getRandomPeople();
+
   protected getRandomPerson() {
     this.currentPeople$ = this.peopleService.getRandomPeople();
+  }
+
+  deletePeople(id: string) {
+    this.peoples$ = this.peopleService.deletePeople(id);
   }
 }

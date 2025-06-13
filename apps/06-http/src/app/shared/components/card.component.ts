@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { SharedImports } from "../imports/shared-imports";
 import { RouterModule } from "@angular/router";
 import { NgOptimizedImage } from "@angular/common";
@@ -37,7 +37,7 @@ import { People } from "../models/people.model";
                 <a mat-button title="Edit" [routerLink]="'/people/'+peopleParam.id">
                   <mat-icon>create</mat-icon>
                 </a>
-                <a mat-button title="Delete">
+                <a mat-button title="Delete" (click)="personDelete(peopleParam.id)">
                   <mat-icon>delete</mat-icon>
                 </a>
             </div>
@@ -47,5 +47,11 @@ import { People } from "../models/people.model";
     styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
+
     @Input() peopleParam: People;
+    @Output() personDeleteEvent = new EventEmitter<string>();
+
+    protected personDelete(id: string) {
+        this.personDeleteEvent.emit(id);
+    }
 }

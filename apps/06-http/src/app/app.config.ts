@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, Routes, withComponentInputBinding } from '@angular/router';
+import { provideRouter, Routes, withComponentInputBinding, withRouterConfig } from '@angular/router';
 
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,7 +12,7 @@ const APP_ROUTES: Routes = [
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideRouter(APP_ROUTES, withComponentInputBinding()),
+        provideRouter(APP_ROUTES, withComponentInputBinding(), withRouterConfig({ onSameUrlNavigation: 'reload' })),
         provideAnimations(),
         provideHttpClient()
     ]

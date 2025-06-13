@@ -11,14 +11,14 @@ import { catchError, EMPTY, Observable } from "rxjs";
 export class PeopleService {
 
     private readonly httpClient = inject(HttpClient)
-    private readonly peopleBaseUrl: string = environment.peopleEndpoint;
+    private readonly peopleApiBaseUrl: string = environment.apiUrls.base;
 
     getRandomInteger(maxValue: number): number {
         return Math.floor(Math.random() * maxValue);
     }
 
     getPeoples(): Observable<People[]> {
-        return this.httpClient.get<People[]>(`${this.peopleBaseUrl}/${environment.peoples}`).pipe(
+        return this.httpClient.get<People[]>(`${this.peopleApiBaseUrl}/${environment.apiUrls.peoples}`).pipe(
             catchError((err) => {
                 console.error(err);
                 return EMPTY;
@@ -26,8 +26,17 @@ export class PeopleService {
         );
     }
 
+    deletePeople(id: string): Observable<People[]> {
+        return this.httpClient.delete<People[]>(`${this.peopleApiBaseUrl}/${environment.apiUrls.deletePeople}/${id}`).pipe(
+            catchError(err => {
+                console.error(err);
+                return EMPTY;
+            })
+        );
+    }
+
     getRandomPeople(): Observable<People> {
-        return this.httpClient.get<People>(`${this.peopleBaseUrl}/${environment.random}`).pipe(
+        return this.httpClient.get<People>(`${this.peopleApiBaseUrl}/${environment.apiUrls.random}`).pipe(
             catchError((err) => {
                 console.error(err);
                 return EMPTY;

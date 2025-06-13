@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { SharedImports } from './shared/imports/shared-imports';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'sfeir-app',
@@ -23,7 +24,21 @@ import { RouterModule } from '@angular/router';
     <router-outlet/>
   `,
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  name = 'SFEIR - LUXEMBOURG';
+export class AppComponent implements OnInit {
+  name = 'SWORD - LUXEMBOURG';
+  private readonly router = inject(Router);
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(e => this.router.navigateByUrl(e.url))
+    )
+    // .subscribe((e) => {
+    //   // Code à exécuter à chaque fin de navigation, même sur même URL
+    //   // this.router.navigateByUrl(e.url);
+    // }
+    // );
+  }
 }
