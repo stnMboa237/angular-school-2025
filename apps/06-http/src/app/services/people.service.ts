@@ -13,6 +13,10 @@ export class PeopleService {
     private readonly httpClient = inject(HttpClient)
     private readonly peopleBaseUrl: string = environment.peopleEndpoint;
 
+    getRandomInteger(maxValue: number): number {
+        return Math.floor(Math.random() * maxValue);
+    }
+
     getPeoples(): Observable<People[]> {
         return this.httpClient.get<People[]>(`${this.peopleBaseUrl}/${environment.peoples}`).pipe(
             map(peoples => {
@@ -52,10 +56,6 @@ export class PeopleService {
                 })
             );
         }
-    }
-
-    getRandomInteger(maxValue: number): number {
-        return Math.floor(Math.random() * maxValue);
     }
 
     getRandomPeopleV2(): Observable<People> {

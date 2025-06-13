@@ -2,9 +2,14 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { People } from '../../shared/models/people.model';
 import { Observable } from 'rxjs';
 import { PeopleService } from '../../services/people.service';
+import { SharedImports } from '../../shared/imports/shared-imports';
+import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
+import { FullNamePipe } from "../../shared/pipes/fullname.pipe";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'sfeir-home',
+  imports: [...SharedImports, RouterModule, NgOptimizedImage, FullNamePipe, NgIf, AsyncPipe],
   template: `
   
     <section *ngIf="currentPeople$ | async as people">
@@ -12,7 +17,7 @@ import { PeopleService } from '../../services/people.service';
             <mat-card-title-group>
                 <img mat-card-image [ngSrc]="people.photo" height="128" width="128" priority alt="person-photo" />
                 <mat-card-title>
-                    <a [href]="'/people/'+people.id"> 
+                    <a [routerLink]="'people/'+people.id"> 
                         <span>{{ people.firstname | fullname: people.lastname}}</span>
                     </a>
                 </mat-card-title>
@@ -27,17 +32,17 @@ import { PeopleService } from '../../services/people.service';
                 </mat-card-subtitle>
             </mat-card-title-group>
             <mat-card-content>
-            <div class="contact-info">Manager <a href="/people/1">{{people.manager}}</a></div>
+            <div class="contact-info">Manager <a routerlink="/people/1">{{people.manager}}</a></div>
             <div class="contact-info">Location<a href="http://www.sfeir.com/contact/">{{people.address.city}}</a></div>
             <div class="buttons-info">
-                <a mat-button title="Locate" [href]="'/people/'+people.id">
-                <mat-icon>map</mat-icon>
+                <a mat-button title="Locate" [routerLink]="'/people/'+people.id">
+                  <mat-icon>map</mat-icon>
                 </a>
-                <a mat-button title="Edit" [href]="'/people/'+people.id">
-                <mat-icon>create</mat-icon>
+                <a mat-button title="Edit" [routerLink]="'/people/'+people.id">
+                  <mat-icon>create</mat-icon>
                 </a>
                 <a mat-button title="Delete">
-                <mat-icon>delete</mat-icon>
+                  <mat-icon>delete</mat-icon>
                 </a>
             </div>
             </mat-card-content>
@@ -47,8 +52,7 @@ import { PeopleService } from '../../services/people.service';
     <button mat-fab color="accent" (click)="getRandomPerson()"><i class="material-icons">autorenew</i></button>
   
   `,
-  styleUrls: ['./home.component.scss'],
-  standalone: false,
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnDestroy {
 
