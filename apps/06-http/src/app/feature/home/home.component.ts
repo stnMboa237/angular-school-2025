@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { People } from '../../shared/models/people.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { PeopleService } from '../../services/people.service';
 import { SharedImports } from '../../shared/imports/shared-imports';
 import { AsyncPipe } from '@angular/common';
@@ -13,7 +13,7 @@ import { CardComponent } from '../../shared/components/card.component';
   template: `
     @if(currentPeople$ | async; as people) {
       <section>
-        <sfeir-card [peopleParam]="people" (personDeleteEvent)="deletePeople($event)"/>
+        <sfeir-card [peopleParam]="people" (personDeleteEvent)="getRandomPerson()"/>
       </section>
     }
     <button mat-fab color="accent" (click)="getRandomPerson()"><i class="material-icons">autorenew</i></button>
@@ -23,14 +23,11 @@ import { CardComponent } from '../../shared/components/card.component';
 export class HomeComponent {
 
   private readonly peopleService = inject(PeopleService);
-  protected peoples$: Observable<People[]> | undefined = this.peopleService.getPeoples();
-  protected currentPeople$: Observable<People> | undefined = this.peopleService.getRandomPeople();
+  protected currentPeople$: Observable<People> = this.peopleService.getPeoples().pipe(
+    map(([firstPeron]) => firstPeron)
+  );
 
   protected getRandomPerson() {
     this.currentPeople$ = this.peopleService.getRandomPeople();
-  }
-
-  deletePeople(id: string) {
-    this.peoples$ = this.peopleService.deletePeople(id);
   }
 }

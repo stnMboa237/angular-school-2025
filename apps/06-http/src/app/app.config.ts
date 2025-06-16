@@ -7,7 +7,7 @@ const APP_ROUTES: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', loadComponent: () => import('./feature/home/home.component').then(c => c.HomeComponent) },
     { path: 'people', loadComponent: () => import('./feature/people/people.component').then(c => c.PeopleComponent) },
-    { path: '**', redirectTo: 'home' },
+    // { path: '**', redirectTo: 'home' },
 ];
 
 export const appConfig: ApplicationConfig = {

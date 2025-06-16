@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { People } from '../../shared/models/people.model';
 
 @Injectable({ providedIn: 'root' })
 export class PeopleService {
-  constructor(private readonly httpClient: HttpClient) {}
+
+  private readonly httpClient = inject(HttpClient);
 
   getPeople(): Observable<Array<People>> {
     return this.httpClient.get<Array<People>>(`${environment.peopleEndpoint}/peoples`);

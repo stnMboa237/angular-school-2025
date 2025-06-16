@@ -26,7 +26,7 @@ export class PeopleService {
     }
 
     deletePeople(id: string): Observable<People[]> {
-        return this.httpClient.delete<People[]>(`${environment.peopleBaseApi}/delete/${id}`).pipe(
+        return this.httpClient.delete<People[]>(`${environment.peopleBaseApi}/peoples/${id}`).pipe(
             catchError(err => {
                 console.error(err);
                 return EMPTY;
@@ -35,7 +35,7 @@ export class PeopleService {
     }
 
     getRandomPeople(): Observable<People> {
-        return this.httpClient.get<People>(`${environment.peopleBaseApi}/random`).pipe(
+        return this.httpClient.get<People>(`${environment.peopleBaseApi}/peoples/random`).pipe(
             catchError((err) => {
                 console.error(err);
                 return EMPTY;
