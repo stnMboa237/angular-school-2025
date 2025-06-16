@@ -7,6 +7,7 @@ const APP_ROUTES: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', loadComponent: () => import('./feature/home/home.component').then(c => c.HomeComponent) },
     { path: 'people', loadComponent: () => import('./feature/people/people.component').then(c => c.PeopleComponent) },
+    { path: 'people/:id', loadComponent: () => import('./feature/people/details/people-details.component').then(c => c.PeopleDetailsComponent) },
     // { path: '**', redirectTo: 'home' },
 ];
 

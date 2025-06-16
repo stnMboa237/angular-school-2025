@@ -15,6 +15,10 @@ import { CardComponent } from '../../shared/components/card.component';
       <section>
         <sfeir-card [peopleParam]="people" (personDeleteEvent)="getRandomPerson()"/>
       </section>
+    } @else {
+      <section>
+        <h3>Pas de données</h3>
+      </section>
     }
     <button mat-fab color="accent" (click)="getRandomPerson()"><i class="material-icons">autorenew</i></button>
   `,
@@ -24,7 +28,13 @@ export class HomeComponent {
 
   private readonly peopleService = inject(PeopleService);
   protected currentPeople$: Observable<People> = this.peopleService.getPeoples().pipe(
-    map(([firstPeron]) => firstPeron)
+    // map(([firstPeron]) => firstPeron)
+    map(peoples => {
+      if (Array.isArray(peoples) && peoples.length > 0)
+        return peoples[0];
+      else
+        return null;
+    })
   );
 
   protected getRandomPerson() {

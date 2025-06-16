@@ -27,7 +27,7 @@ import { BadgeDirective } from "../../shared/directives/badge.directive";
                     <mat-list>
                         @for(people of peoples$ | async; track people.id) {
                             <mat-list-item class="mat-whiteframe-2dp mat-card">
-                                <img matListItemAvatar [ngSrc]="people.photo" alt="photo-people" height="40" width="40" priority/>
+                                <img matListItemAvatar [ngSrc]="people.photo" alt="photo-people" height="40" width="40" priority=""/>
                                 <h3 matListItemTitle>
                                     {{ people.firstname | fullname: people.lastname }}  
                                     <span class="sfeir-badge" [sfeirBadge]="people.isManager"></span>

@@ -1,8 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { People } from "../shared/models/people.model";
-import { catchError, EMPTY, Observable } from "rxjs";
+import { catchError, EMPTY, Observable, tap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +19,15 @@ export class PeopleService {
     getPeoples(): Observable<People[]> {
         return this.httpClient.get<People[]>(`${environment.peopleBaseApi}/peoples`).pipe(
             catchError((err) => {
+                console.error(err);
+                return EMPTY;
+            })
+        );
+    }
+
+    getPeopleById(routeId: string): Observable<People> {
+        return this.httpClient.get<People>(`${environment.peopleBaseApi}/peoples/${routeId}`).pipe(
+            catchError(err => {
                 console.error(err);
                 return EMPTY;
             })
