@@ -4,10 +4,11 @@ import { RouterModule } from "@angular/router";
 import { NgOptimizedImage } from "@angular/common";
 import { FullNamePipe } from "../pipes/fullname.pipe";
 import { People } from "../models/people.model";
+import { NAPipe } from "../pipes/na.pipe";
 
 @Component({
     selector: 'sfeir-card',
-    imports: [...SharedImports, RouterModule, NgOptimizedImage, FullNamePipe],
+    imports: [...SharedImports, RouterModule, NgOptimizedImage, FullNamePipe, NAPipe],
     template: `
         <mat-card class="mat-whiteframe-2dp">
             <mat-card-title-group>
@@ -28,8 +29,9 @@ import { People } from "../models/people.model";
                 </mat-card-subtitle>
             </mat-card-title-group>
             <mat-card-content>
-            <div class="contact-info">Manager <a routerlink="/people/1">{{peopleParam.manager}}</a></div>
-            <div class="contact-info">Location<a href="http://www.sfeir.com/contact/">{{peopleParam.address.city}}</a></div>
+            <div class="contact-info">Manager <a routerlink="/people/1"> {{peopleParam.manager | na }}</a></div>
+            <div class="contact-info">Location<a href="https://www.sword-group.com/fr/luxembourg"> {{peopleParam.address.city}}</a></div>
+            <div class="contact-info">birthDate<a href="birthDate"> {{ peopleParam.birthDate | date }}</a></div>
             <div class="buttons-info">
                 <a mat-button title="Locate" [routerLink]="'/people/'+peopleParam.id">
                   <mat-icon>map</mat-icon>

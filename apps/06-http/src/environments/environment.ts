@@ -20,3 +20,15 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+/**
+ * app.get('/api/peoples', api.listAll);
+ * app.get('/api/peoples/random', api.getRandom);
+ * app.get('/api/peoples/:id', api.get);
+ * app.get('/api/peoples/name/:name', api.filterByName);
+ * app.get('/api/peoples/skill/:skill', api.filterBySkill);
+ * app.post('/api/peoples', api.create);
+ * app.put('/api/peoples/:id', api.update);
+ * app.delete('/api/peoples/:id', api.delete);
+ * 
+ */
