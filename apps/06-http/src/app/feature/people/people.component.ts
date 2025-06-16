@@ -1,10 +1,10 @@
 import { Component, inject } from "@angular/core";
 import { SharedImports } from "../../shared/imports/shared-imports";
 import { People } from "../../shared/models/people.model";
-import { Observable, tap } from "rxjs";
+import { Observable } from "rxjs";
 import { PeopleService } from "../../services/people.service";
 import { RouterModule } from "@angular/router";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { CardComponent } from "../../shared/components/card.component";
 
 @Component({

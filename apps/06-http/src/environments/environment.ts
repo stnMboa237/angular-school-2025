@@ -4,12 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrls: {
-    base: 'http://localhost:9000/api',
-    peoples: 'peoples',
-    random: 'peoples/random',
-    deletePeople: 'peoples'
-  }
+  peopleBaseApi: 'http://localhost:9000/api'
 };
 
 /*
