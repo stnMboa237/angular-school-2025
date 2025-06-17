@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
-import { People, PeopleForm } from "../shared/models/people.model";
-import { catchError, EMPTY, Observable, tap } from "rxjs";
+import { environment } from "../../../environments/environment";
+import { People, PeopleForm } from "../../shared/models/people.model";
+import { catchError, EMPTY, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { SharedImports } from "../../shared/imports/shared-imports";
 import { BehaviorSubject, EMPTY, filter, Observable, shareReplay, switchMap, tap, } from "rxjs";
-import { PeopleService } from "../../services/people.service";
+import { PeopleService } from "../../core/services/people.service";
 import { RouterModule } from "@angular/router";
 import { AsyncPipe } from "@angular/common";
 import { CardComponent } from "../../shared/components/people-card/card.component";

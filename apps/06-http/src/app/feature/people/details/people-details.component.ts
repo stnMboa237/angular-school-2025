@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { PeopleService } from "../../../services/people.service";
+import { PeopleService } from '../../../core/services/people.service';
 import { SharedImports } from "../../../shared/imports/shared-imports";
 import { ActivatedRoute } from "@angular/router";
 import { map, Observable, switchMap } from "rxjs";

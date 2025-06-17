@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { People } from '../../shared/models/people.model';
 import { map, Observable } from 'rxjs';
-import { PeopleService } from '../../services/people.service';
+import { PeopleService } from '../../core/services/people.service';
 import { SharedImports } from '../../shared/imports/shared-imports';
 import { AsyncPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';

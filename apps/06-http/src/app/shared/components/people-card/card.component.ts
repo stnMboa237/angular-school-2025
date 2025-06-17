@@ -11,7 +11,7 @@ import { NAPipe } from "../../pipes/na.pipe";
     template: `
         <mat-card class="mat-whiteframe-2dp">
             <mat-card-title-group>
-                <img mat-card-image [ngSrc]="peopleParam.photo" alt="person-photo" height="128" width="128"/>
+                <img mat-card-image [ngSrc]="peopleParam.photo" alt="person-photo" height="128" width="128" />
                 <mat-card-title>
                     <a [routerLink]="'/people/'+peopleParam.id"> 
                         <span>{{ peopleParam.firstname | fullname: peopleParam.lastname}}</span>
