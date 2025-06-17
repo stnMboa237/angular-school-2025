@@ -29,3 +29,12 @@ export interface People {
   manager: string;
   managerId: string;
 }
+
+export interface PeopleForm {
+  id?: string,
+  photo: string,
+  firstname: string,
+  lastname: string,
+  email: string,
+  phone: string
+}

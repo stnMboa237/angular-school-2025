@@ -7,7 +7,44 @@ import { AddPersonDialogComponent } from './components/add-person-dialog/add-per
 
 @Component({
   selector: 'sfeir-people',
-  templateUrl: './people.component.html',
+  template: `
+    @if (view$ | async;as currentView) {
+      @switch (currentView) {
+        @case ('card') {
+          <section data-testid="card-view">
+            @for (person of people$ | async;track person.id) {
+              <sfeir-card [person]="person" (personDelete)="deletePerson($event)" />
+            }
+          </section>
+        }
+        @case ('list') {
+          <section data-testid="list-view">
+            <mat-list>
+              @for (person of people$ | async;track person.id) {
+                <mat-list-item class="mat-whiteframe-2dp mat-card">
+                  <img matListItemAvatar ngSrc="{{ person.photo }}" alt="photo-people" height="40" width="40" />
+                  <h3 matListItemLine>
+                    {{ person.firstname }} {{ person.lastname }}
+                    <span class="sfeir-badge" [sfeirBadge]="person.isManager"></span>
+                  </h3>
+                  <p matListItemLine>
+                    <span> {{ person.entity }} </span> — <span>{{ person.email }} </span>
+                  </p>
+                </mat-list-item>
+              }
+            </mat-list>
+          </section>
+        }
+      }
+      <section class="buttons-fab">
+        <button mat-fab color="accent" class="button-add" (click)="showDialog()" data-testid="button-modal"><i class="material-icons">add</i></button>
+        <button mat-fab color="warn" (click)="changeView(currentView)" name="change-view" data-testid="button-view">
+          <i class="material-icons">{{ currentView === 'card' ? 'list' : 'view_stream' }}</i>
+        </button>
+      </section>
+}
+  
+  `,
   styleUrls: ['./people.component.scss'],
   standalone: false,
 })
@@ -18,7 +55,7 @@ export class PeopleComponent implements OnInit {
   constructor(
     private readonly peopleService: PeopleService,
     private readonly matDialogService: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.people$ = this.peopleService.getPeople().pipe(shareReplay(1));

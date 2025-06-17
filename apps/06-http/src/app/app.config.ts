@@ -1,5 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, Routes, withComponentInputBinding, withRouterConfig } from '@angular/router';
 
@@ -13,6 +14,7 @@ const APP_ROUTES: Routes = [
 
 export const appConfig: ApplicationConfig = {
     providers: [
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
         provideRouter(APP_ROUTES, withComponentInputBinding(), withRouterConfig({ onSameUrlNavigation: 'reload' })),
         provideAnimations(),
         provideHttpClient()

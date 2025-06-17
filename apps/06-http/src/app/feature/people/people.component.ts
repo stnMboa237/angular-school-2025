@@ -1,16 +1,19 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { SharedImports } from "../../shared/imports/shared-imports";
-import { BehaviorSubject, shareReplay, } from "rxjs";
+import { BehaviorSubject, EMPTY, filter, Observable, shareReplay, switchMap, tap, } from "rxjs";
 import { PeopleService } from "../../services/people.service";
 import { RouterModule } from "@angular/router";
-import { AsyncPipe, NgOptimizedImage } from "@angular/common";
-import { CardComponent } from "../../shared/components/card.component";
+import { AsyncPipe } from "@angular/common";
+import { CardComponent } from "../../shared/components/people-card/card.component";
 import { FullNamePipe } from "../../shared/pipes/fullname.pipe";
 import { BadgeDirective } from "../../shared/directives/badge.directive";
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AddPersonDialogComponent } from "../../shared/components/people-dialog/add-person-dialog.component";
+import { People, PeopleForm } from "../../shared/models/people.model";
 
 @Component({
     selector: 'sfeir-people',
-    imports: [...SharedImports, RouterModule, AsyncPipe, CardComponent, FullNamePipe, NgOptimizedImage, BadgeDirective],
+    imports: [...SharedImports, RouterModule, AsyncPipe, CardComponent, FullNamePipe, BadgeDirective, MatDialogModule],
     template: `
     @if(view$ | async; as currentView) {
         @switch (currentView) {
@@ -27,7 +30,7 @@ import { BadgeDirective } from "../../shared/directives/badge.directive";
                     <mat-list>
                         @for(people of peoples$ | async; track people.id) {
                             <mat-list-item class="mat-whiteframe-2dp mat-card">
-                                <img matListItemAvatar [ngSrc]="people.photo" alt="photo-people" height="40" width="40" priority=""/>
+                                <img matListItemAvatar [ngSrc]="people.photo" alt="photo-people" height="40" width="40" />
                                 <h3 matListItemTitle>
                                     {{ people.firstname | fullname: people.lastname }}  
                                     <span class="sfeir-badge" [sfeirBadge]="people.isManager"></span>
@@ -44,8 +47,11 @@ import { BadgeDirective } from "../../shared/directives/badge.directive";
         }
 
         <section class="buttons-fab">
-            <button mat-fab color="warn" (click)="changeView(currentView)" name="change-view">
-            <i class="material-icons">{{ currentView === 'card' ? 'list' : 'view_stream' }}</i>
+            <button mat-fab color="accent" class="button-add" (click)="showDialog()" data-testid="button-modal">
+                <i class="material-icons">add</i>
+            </button>
+            <button mat-fab color="warn" (click)="changeView(currentView)" name="change-view" data-testid="button-view">
+                <i class="material-icons">{{ currentView === 'card' ? 'list' : 'view_stream' }}</i>
             </button>
         </section>
     }   
@@ -53,11 +59,32 @@ import { BadgeDirective } from "../../shared/directives/badge.directive";
     styleUrls: ['./people.component.scss'],
 })
 
-export class PeopleComponent {
+export class PeopleComponent implements OnInit {
 
     private readonly peopleService = inject(PeopleService);
-    protected peoples$ = this.peopleService.getPeoples().pipe(shareReplay(1));
+    protected peoples$: Observable<Array<People>> = EMPTY;
+
     protected view$: BehaviorSubject<'card' | 'list'> = new BehaviorSubject('card');
+    private readonly matDialogService = inject(MatDialog);
+
+    ngOnInit(): void {
+        this.peoples$ = this.peopleService.getPeoples().pipe(shareReplay(1));
+    }
+
+    showDialog(): void {
+        this.matDialogService
+            .open(AddPersonDialogComponent, { width: '30%', height: 'fit-content' })
+            .afterClosed()
+            .pipe(
+                filter(peopleForm => !!peopleForm),
+                tap(console.log),
+                switchMap((peopleForm: PeopleForm) => this.peopleService.AddNewPerson(peopleForm)), // création de la personne
+                switchMap(() => {
+                    this.peoples$ = this.peopleService.getPeoples().pipe(shareReplay(1)); // on récupère la nouvelle liste des personnes
+                    return this.peoples$;
+                })
+            ).subscribe(); // il faut subscribe afin que les peoples$ soit mis à jour
+    }
 
     deletePeople(id: string) {
         this.peoples$ = this.peopleService.deletePeople(id).pipe(shareReplay(1));

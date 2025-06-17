@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { People } from "../shared/models/people.model";
+import { People, PeopleForm } from "../shared/models/people.model";
 import { catchError, EMPTY, Observable, tap } from "rxjs";
 
 @Injectable({
@@ -9,7 +9,6 @@ import { catchError, EMPTY, Observable, tap } from "rxjs";
 })
 
 export class PeopleService {
-
     private readonly httpClient = inject(HttpClient)
 
     getRandomInteger(maxValue: number): number {
@@ -46,6 +45,16 @@ export class PeopleService {
     getRandomPeople(): Observable<People> {
         return this.httpClient.get<People>(`${environment.peopleBaseApi}/peoples/random`).pipe(
             catchError((err) => {
+                console.error(err);
+                return EMPTY;
+            })
+        );
+    }
+
+    AddNewPerson(people: PeopleForm): Observable<void> {
+        debugger;
+        return this.httpClient.post<void>(`${environment.peopleBaseApi}/peoples`, people).pipe(
+            catchError(err => {
                 console.error(err);
                 return EMPTY;
             })

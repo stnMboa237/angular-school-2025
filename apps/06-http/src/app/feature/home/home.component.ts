@@ -5,7 +5,7 @@ import { PeopleService } from '../../services/people.service';
 import { SharedImports } from '../../shared/imports/shared-imports';
 import { AsyncPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CardComponent } from '../../shared/components/card.component';
+import { CardComponent } from '../../shared/components/people-card/card.component';
 
 @Component({
   selector: 'sfeir-home',
@@ -28,9 +28,8 @@ export class HomeComponent {
 
   private readonly peopleService = inject(PeopleService);
   protected currentPeople$: Observable<People> = this.peopleService.getPeoples().pipe(
-    // map(([firstPeron]) => firstPeron)
     map(peoples => {
-      if (Array.isArray(peoples) && peoples.length > 0)
+      if (!!peoples && peoples.length > 0)
         return peoples[0];
       else
         return null;
