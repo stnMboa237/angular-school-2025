@@ -52,7 +52,6 @@ export class PeopleService {
     }
 
     AddNewPerson(people: PeopleForm): Observable<void> {
-        debugger;
         return this.httpClient.post<void>(`${environment.peopleBaseApi}/peoples`, people).pipe(
             catchError(err => {
                 console.error(err);
