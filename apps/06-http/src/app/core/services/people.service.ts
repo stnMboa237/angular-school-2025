@@ -60,4 +60,13 @@ export class PeopleService {
         );
     }
 
+    updatePeople(people: PeopleForm): Observable<People> {
+        return this.httpClient.put<People>(`${environment.peopleBaseApi}/peoples/${people.id}`, people).pipe(
+            catchError(err => {
+                console.log(err);
+                return EMPTY;
+            })
+        );
+    }
+
 }

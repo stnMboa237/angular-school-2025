@@ -32,11 +32,11 @@ import { NAPipe } from "../../pipes/na.pipe";
             <div class="contact-info">Location<a href="https://www.sword-group.com/fr/luxembourg"> {{peopleParam.address?.city}}</a></div>
             <div class="contact-info">birthDate<a href="birthDate"> {{ peopleParam.birthDate | date }}</a></div>
             <div class="buttons-info">
-                <a mat-button title="Locate" [routerLink]="'/people/'+peopleParam.id">
+                <a mat-button title="Locate" [routerLink]="['/people/', peopleParam.id]">
                   <mat-icon>map</mat-icon>
                 </a>
-                <a mat-button title="Edit" [routerLink]="'/people/'+peopleParam.id">
-                  <mat-icon>create</mat-icon>
+                <a mat-button title="Edit" [routerLink]="['/people/', peopleParam.id]">
+                  <mat-icon>edit</mat-icon>
                 </a>
                 <a mat-button title="Delete" (click)="personDelete(peopleParam.id)">
                   <mat-icon>delete</mat-icon>
