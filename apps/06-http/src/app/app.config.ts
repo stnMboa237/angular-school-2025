@@ -1,9 +1,10 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, Routes, withComponentInputBinding } from '@angular/router';
+import { AuthorizationInterceptor } from './core/interceptors/authorization.interceptor';
 
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,7 +23,7 @@ export const appConfig: ApplicationConfig = {
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
         provideRouter(APP_ROUTES, withComponentInputBinding()),
         provideAnimations(),
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withInterceptors([AuthorizationInterceptor])),
         importProvidersFrom(MatDialogModule)
     ]
 }

@@ -16,57 +16,33 @@ export class PeopleService {
     }
 
     getPeoples(): Observable<People[]> {
-        return this.httpClient.get<People[]>(`${environment.peopleBaseApi}/peoples`).pipe(
-            catchError((err) => {
-                console.error(err);
-                return EMPTY;
-            })
-        );
+        return this.httpClient.get<People[]>(`${environment.peopleBaseApi}/peoples`);
+        // .pipe(
+        //     catchError(err => {
+        //         console.error(err);
+        //         return EMPTY;
+        //     })
+        // );
     }
 
     getPeopleById(routeId: string): Observable<People> {
-        return this.httpClient.get<People>(`${environment.peopleBaseApi}/peoples/${routeId}`).pipe(
-            catchError(err => {
-                console.error(err);
-                return EMPTY;
-            })
-        );
+        return this.httpClient.get<People>(`${environment.peopleBaseApi}/peoples/${routeId}`);
     }
 
     deletePeople(id: string): Observable<People[]> {
-        return this.httpClient.delete<People[]>(`${environment.peopleBaseApi}/peoples/${id}`).pipe(
-            catchError(err => {
-                console.error(err);
-                return EMPTY;
-            })
-        );
+        return this.httpClient.delete<People[]>(`${environment.peopleBaseApi}/peoples/${id}`);
     }
 
     getRandomPeople(): Observable<People> {
-        return this.httpClient.get<People>(`${environment.peopleBaseApi}/peoples/random`).pipe(
-            catchError((err) => {
-                console.error(err);
-                return EMPTY;
-            })
-        );
+        return this.httpClient.get<People>(`${environment.peopleBaseApi}/peoples/random`);
     }
 
     AddNewPerson(people: PeopleForm): Observable<void> {
-        return this.httpClient.post<void>(`${environment.peopleBaseApi}/peoples`, people).pipe(
-            catchError(err => {
-                console.error(err);
-                return EMPTY;
-            })
-        );
+        return this.httpClient.post<void>(`${environment.peopleBaseApi}/peoples`, people);
     }
 
     updatePeople(people: PeopleForm): Observable<People> {
-        return this.httpClient.put<People>(`${environment.peopleBaseApi}/peoples/${people.id}`, people).pipe(
-            catchError(err => {
-                console.log(err);
-                return EMPTY;
-            })
-        );
+        return this.httpClient.put<People>(`${environment.peopleBaseApi}/peoples/${people.id}`, people);
     }
 
 }

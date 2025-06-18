@@ -15,10 +15,6 @@ import { CardComponent } from '../../shared/components/people-card/card.componen
       <section>
         <sfeir-card [peopleParam]="people" (personDeleteEvent)="getRandomPerson()"/>
       </section>
-    } @else {
-      <section>
-        <h3>Pas de données</h3>
-      </section>
     }
     <button mat-fab color="accent" (click)="getRandomPerson()"><i class="material-icons">autorenew</i></button>
   `,
