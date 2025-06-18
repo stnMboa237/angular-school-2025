@@ -74,7 +74,7 @@ export class FormComponent implements OnInit {
     @Input() people: People;
 
     ngOnInit(): void {
-        // Syntaxe: x = x || y;
+        // Syntaxe: x ||= y;
         // Si x est falsy (comme false, 0, null, undefined, NaN, ou ""), alors x prend la valeur de y.
         // Sinon, x garde sa valeur actuelle.
         this.people ||= { photo: 'https://randomuser.me/api/portraits/lego/6.jpg' } as People;

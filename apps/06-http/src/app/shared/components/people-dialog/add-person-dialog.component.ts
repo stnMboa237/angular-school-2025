@@ -1,15 +1,15 @@
 import { Component } from "@angular/core";
-import { FormComponent } from "../Form/form.component";
 import { PeopleForm } from "../../models/people.model";
 import { MatDialogRef } from "@angular/material/dialog";
+import { PeopleReactiveFormComponent } from "../Form/reactive-form/people-form-reactive.component";
 
 @Component({
     selector: 'add-person-dialog',
     template: `
-        <people-form (save)="closeDialog($event)" (cancel)="closeDialog()"/>
+        <people-reactive-form (save)="closeDialog($event)" (cancel)="closeDialog()"/>
     `,
     styleUrls: ['./add-person-dialog.component.ts.scss'],
-    imports: [FormComponent]
+    imports: [PeopleReactiveFormComponent]
 })
 
 export class AddPersonDialogComponent {

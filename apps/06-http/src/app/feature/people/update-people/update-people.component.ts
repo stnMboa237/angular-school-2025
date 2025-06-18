@@ -1,19 +1,23 @@
 import { Component, inject } from "@angular/core";
 import { SharedImports } from "../../../shared/imports/shared-imports";
-import { FormComponent } from "../../../shared/components/Form/form.component";
 import { filter, map, Observable, switchMap } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { PeopleService } from "../../../core/services/people.service";
 import { People, PeopleForm } from "../../../shared/models/people.model";
 import { Location } from "@angular/common";
+import { PeopleReactiveFormComponent } from "../../../shared/components/Form/reactive-form/people-form-reactive.component";
 
 @Component({
     selector: 'people-update',
-    imports: [...SharedImports, FormComponent],
+    imports: [...SharedImports, PeopleReactiveFormComponent],
     template: `
         <section>
             @if(people$ | async; as people) {
-            <people-form [people]="people" (save)="UpdatePeople($event)" (cancel)="goBack()"/>
+                <!-- template-driven-form -->
+            <!-- <people-form [people]="people" (save)="UpdatePeople($event)" (cancel)="goBack()"/> -->
+
+            <!-- reactive-form -->
+            <people-reactive-form [people]="people" (save)="UpdatePeople($event)" (cancel)="goBack()"/>
         }
         </section>
     `,

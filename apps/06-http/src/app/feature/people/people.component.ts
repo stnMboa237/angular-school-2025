@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { SharedImports } from "../../shared/imports/shared-imports";
-import { BehaviorSubject, EMPTY, filter, Observable, shareReplay, switchMap, tap, } from "rxjs";
+import { BehaviorSubject, filter, Observable, shareReplay, switchMap, } from "rxjs";
 import { PeopleService } from "../../core/services/people.service";
 import { RouterModule } from "@angular/router";
 import { AsyncPipe } from "@angular/common";
@@ -59,17 +59,11 @@ import { People, PeopleForm } from "../../shared/models/people.model";
     styleUrls: ['./people.component.scss'],
 })
 
-export class PeopleComponent implements OnInit {
-
+export class PeopleComponent {
     private readonly peopleService = inject(PeopleService);
-    protected peoples$: Observable<Array<People>> = EMPTY;
-
+    protected peoples$: Observable<Array<People>> = this.peopleService.getPeoples().pipe(shareReplay(1));
     protected view$: BehaviorSubject<'card' | 'list'> = new BehaviorSubject('card');
     private readonly matDialogService = inject(MatDialog);
-
-    ngOnInit(): void {
-        this.peoples$ = this.peopleService.getPeoples().pipe(shareReplay(1));
-    }
 
     showDialog(): void {
         this.matDialogService
@@ -77,12 +71,12 @@ export class PeopleComponent implements OnInit {
             .afterClosed()
             .pipe(
                 filter(peopleForm => !!peopleForm),
-                tap(console.log),
                 switchMap((peopleForm: PeopleForm) => this.peopleService.AddNewPerson(peopleForm)), // création de la personne
                 switchMap(() => {
                     this.peoples$ = this.peopleService.getPeoples().pipe(shareReplay(1)); // on récupère la nouvelle liste des personnes
                     return this.peoples$;
-                })
+                }),
+
             ).subscribe(); // il faut subscribe afin que les peoples$ soit mis à jour
     }
 
