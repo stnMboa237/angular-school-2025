@@ -46,8 +46,8 @@ import { PersonForm } from "./people-form";
                         @if(peopleForm.controls.email.errors?.['required']){
                             <mat-error>Ce champ est requis</mat-error>
                         }
-                        @if(peopleForm.controls.email.errors?.['email']){
-                        <mat-error>Ce champ doit contenir un email</mat-error>
+                        @if(peopleForm.controls.email.errors?.['swordEmail']){
+                        <mat-error>Ce champ doit contenir un email SWORD</mat-error>
                         }
                     </mat-form-field>
                     <!-- Phone -->
