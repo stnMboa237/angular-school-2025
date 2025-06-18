@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validator, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { ControlsFromInterface } from "../../../models/controls-from-interface";
 import { PeopleForm } from "../../../models/people.model";
 
@@ -24,6 +24,7 @@ export class PersonForm extends FormGroup<ControlsFromInterface<PeopleForm>> {
         !!data && this.patchValue(data);
     }
 
+    // Renvoit null si la validation est réussie, sinon renvoit { nomErreur: true } en cas d'echec
     static swordEmailValidator(control: AbstractControl<string | null>): ValidationErrors {
         if (!control.value)
             return null;

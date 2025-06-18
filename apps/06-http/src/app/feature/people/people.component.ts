@@ -76,7 +76,6 @@ export class PeopleComponent {
                     this.peoples$ = this.peopleService.getPeoples().pipe(shareReplay(1)); // on récupère la nouvelle liste des personnes
                     return this.peoples$;
                 }),
-
             ).subscribe(); // il faut subscribe afin que les peoples$ soit mis à jour
     }
 
