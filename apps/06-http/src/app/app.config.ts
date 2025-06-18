@@ -1,8 +1,9 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, Routes, withComponentInputBinding, withRouterConfig } from '@angular/router';
+import { provideRouter, Routes, withComponentInputBinding } from '@angular/router';
 
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,8 +20,9 @@ const APP_ROUTES: Routes = [
 export const appConfig: ApplicationConfig = {
     providers: [
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
-        provideRouter(APP_ROUTES, withComponentInputBinding(), withRouterConfig({ onSameUrlNavigation: 'reload' })),
+        provideRouter(APP_ROUTES, withComponentInputBinding()),
         provideAnimations(),
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        importProvidersFrom(MatDialogModule)
     ]
 }

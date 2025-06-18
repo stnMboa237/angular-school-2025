@@ -12,10 +12,7 @@ const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadComponent: async () => (await import('./feature/home/home.component')).HomeComponent },
   { path: 'people', loadComponent: async () => (await import('./feature/people/people.component')).PeopleComponent },
-  {
-    path: 'people/:id',
-    loadChildren: async () => await import('./feature/update-person/update-person.route'),
-  },
+  { path: 'people/:id', loadChildren: async () => await import('./feature/update-person/update-person.route') },
 ];
 
 export const appConfig: ApplicationConfig = {
