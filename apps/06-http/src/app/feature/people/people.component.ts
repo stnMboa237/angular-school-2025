@@ -75,8 +75,6 @@ export class PeopleComponent {
                 switchMap((peopleForm: PeopleForm) => this.peopleService.AddNewPerson(peopleForm)), // création de la personne
                 switchMap(() => this.peopleService.getPeoples().pipe(shareReplay(1))), // liste contenant la personne nouvellement créée
             );
-        switchMap(() => this.peopleService.getPeoples().pipe(shareReplay(1))), // liste contenant la personne nouvellement créée
-            );
     }
 
     deletePeople(id: string) {
