@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { PeopleForm } from "../../models/people.model";
 import { MatDialogRef } from "@angular/material/dialog";
 import { PeopleReactiveFormComponent } from "../Form/reactive-form/people-form-reactive.component";
@@ -13,7 +13,8 @@ import { PeopleReactiveFormComponent } from "../Form/reactive-form/people-form-r
 })
 
 export class AddPersonDialogComponent {
-    constructor(private readonly dialoRef: MatDialogRef<AddPersonDialogComponent>) { }
+    private readonly dialoRef: MatDialogRef<AddPersonDialogComponent> = inject(MatDialogRef);
+
     closeDialog(people: PeopleForm = null) {
         this.dialoRef.close(people);
     }

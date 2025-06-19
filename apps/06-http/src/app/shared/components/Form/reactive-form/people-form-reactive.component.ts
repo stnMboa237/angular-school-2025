@@ -46,18 +46,18 @@ import { PersonForm } from "./people-form";
                         @if(peopleForm.controls.email.errors?.['required']){
                             <mat-error>Ce champ est requis</mat-error>
                         }
-                        @if(peopleForm.controls.email.errors?.['swordEmail']){
-                        <mat-error>Ce champ doit contenir un email SWORD</mat-error>
+                        @if(peopleForm.controls.email.errors?.['email']){
+                        <mat-error>Ce champ doit contenir un email valide</mat-error>
                         }
                     </mat-form-field>
                     <!-- Phone -->
                     <mat-form-field>
                         <mat-label>Phone</mat-label>
-                        <input type="text" name="phone" matInput placeholder="Phone" formControlName="phone"/>
+                        <input type="text" name="phone" matInput placeholder="+352 621 123 456" formControlName="phone"/>
                         @if(peopleForm.controls.phone.errors?.['required']){
                             <mat-error>Ce champ est requis</mat-error>
                         }
-                        @if(peopleForm.controls.phone.errors?.['pattern']){
+                        @if(peopleForm.controls.phone.errors?.['phone']){
                             <mat-error>Le téléphone doit avoir 10 chiffres</mat-error>
                         }
                     </mat-form-field>
@@ -79,7 +79,7 @@ export class PeopleReactiveFormComponent implements OnChanges {
     @Output() cancel: EventEmitter<void> = new EventEmitter();
     @Output() save: EventEmitter<PeopleForm> = new EventEmitter();
     @Input() people: People;
-    protected peopleForm = new PersonForm();
+    peopleForm = new PersonForm();
 
     ngOnChanges(changes: SimpleChanges): void {
         const { people } = changes;
