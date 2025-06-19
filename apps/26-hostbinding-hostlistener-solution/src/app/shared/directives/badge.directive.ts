@@ -11,7 +11,7 @@ export class BadgeDirective implements OnInit {
   constructor(
     private readonly element: ElementRef<HTMLElement>,
     private readonly renderer: Renderer2,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.isManager) {

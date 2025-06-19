@@ -13,9 +13,8 @@ const APP_ROUTES: Routes = [
 
     // ici on loadChildren pour le path 'people/:id' car cette feature pourrait évoluer et devenir plus grande. 
     // Du coup, ses routes 'enfants/filles' seront enregistrées dans le update-people.routing.ts
-    { path: 'people/:id', loadChildren: async () => await import('./feature/people/update-people/update-people.routing') }
-
-    // { path: '**', redirectTo: 'home' },
+    { path: 'people/:id', loadChildren: async () => await import('./feature/people/update-people/update-people.routing') },
+    { path: '**', redirectTo: 'home' },
 ];
 
 export const appConfig: ApplicationConfig = {

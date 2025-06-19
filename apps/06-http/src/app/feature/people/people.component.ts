@@ -31,7 +31,7 @@ import { People, PeopleForm } from "../../shared/models/people.model";
                     <mat-list>
                         @for(people of peoples$ | async; track people.id) {
                             <mat-list-item class="mat-whiteframe-2dp mat-card">
-                                <img matListItemAvatar [ngSrc]="people.photo" alt="photo-people" height="40" width="40" />
+                                <img matListItemAvatar [ngSrc]="people.photo" alt="photo-people" height="40" width="40"/>
                                 <h3 matListItemTitle>
                                     {{ people.firstname | fullname: people.lastname }}  
                                     <span class="sfeir-badge" [sfeirBadge]="people.isManager"></span>
@@ -68,7 +68,7 @@ export class PeopleComponent {
 
     showDialog(): void {
         this.peoples$ = this.matDialogService
-            .open(AddPersonDialogComponent, { width: '30%', height: 'fit-content', disableClose: true },)
+            .open(AddPersonDialogComponent, { width: '30%', height: 'fit-content', },)
             .afterClosed()
             .pipe(
                 filter(peopleForm => !!peopleForm),
