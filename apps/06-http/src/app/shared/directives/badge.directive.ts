@@ -7,7 +7,7 @@ import { Directive, ElementRef, HostBinding, HostListener, Input, OnInit, Render
 export class BadgeDirective implements OnInit {
     private readonly defaultBadgeColor = 'black';
     @Input('sfeirBadge') isManager: boolean;
-    @HostBinding('style.color') iconColor = this.defaultBadgeColor;
+    @HostBinding('style.color') private iconColor = this.defaultBadgeColor;
     // avec HostBinding, je bind un propriété de l'element HTML de la directive en cours.
     // Dans cet exemple, je set la prop 'style.color' de l'element <span class="sfeir-badge" [sfeirBadge]="people.isManager"></span> où la directive est appelée.
 

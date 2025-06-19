@@ -4,10 +4,11 @@ import { RouterModule } from "@angular/router";
 import { FullNamePipe } from "../../pipes/fullname.pipe";
 import { People } from "../../models/people.model";
 import { NAPipe } from "../../pipes/na.pipe";
+import { DisplayDirective } from "../../directives/display.directive";
 
 @Component({
     selector: 'sfeir-card',
-    imports: [...SharedImports, RouterModule, FullNamePipe, NAPipe],
+    imports: [...SharedImports, RouterModule, FullNamePipe, NAPipe, DisplayDirective],
     template: `
         <mat-card class="mat-whiteframe-2dp">
             <mat-card-title-group>
@@ -35,12 +36,16 @@ import { NAPipe } from "../../pipes/na.pipe";
                 <a mat-button title="Locate" [routerLink]="['/people/', peopleParam.id]">
                   <mat-icon>map</mat-icon>
                 </a>
-                <a mat-button title="Edit" [routerLink]="['/people/', peopleParam.id]">
-                  <mat-icon>edit</mat-icon>
-                </a>
-                <a mat-button title="Delete" (click)="personDelete(peopleParam.id)">
-                  <mat-icon>delete</mat-icon>
-                </a>
+                
+                <!-- directive structurelle similaire à *ngIf. la directive sfeirDisplay permet selon la condition d'editer ou de supprimer les personnes qui ne sont pas manager  -->
+                <ng-container *sfeirDisplay="!peopleParam.isManager">
+                    <a mat-button title="Edit" [routerLink]="['/people/', peopleParam.id]">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                    <a mat-button title="Delete" (click)="personDelete(peopleParam.id)">
+                        <mat-icon>delete</mat-icon>
+                    </a>
+                </ng-container>
             </div>
             </mat-card-content>
         </mat-card>
