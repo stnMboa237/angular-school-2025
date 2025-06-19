@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { SharedImports } from "../../shared/imports/shared-imports";
 import { BehaviorSubject, filter, Observable, shareReplay, switchMap, } from "rxjs";
 import { PeopleService } from "../../core/services/people.service";
@@ -14,6 +15,7 @@ import { People, PeopleForm } from "../../shared/models/people.model";
 @Component({
     selector: 'sfeir-people',
     imports: [...SharedImports, RouterModule, AsyncPipe, CardComponent, FullNamePipe, BadgeDirective, MatDialogModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     @if(view$ | async; as currentView) {
@@ -74,6 +76,8 @@ export class PeopleComponent {
                 filter(peopleForm => !!peopleForm),
                 switchMap((peopleForm: PeopleForm) => this.peopleService.AddNewPerson(peopleForm)), // création de la personne
                 switchMap(() => this.peopleService.getPeoples().pipe(shareReplay(1))), // liste contenant la personne nouvellement créée
+            );
+        switchMap(() => this.peopleService.getPeoples().pipe(shareReplay(1))), // liste contenant la personne nouvellement créée
             );
     }
 
